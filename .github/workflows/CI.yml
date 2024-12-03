@@ -62,6 +62,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Verify SSH connection
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 65002 88.223.85.92 >> ~/.ssh/known_hosts
+
       - name: Deploy to Hostinger server
         run: |
           rsync -avz -e "ssh -p 65002" --exclude='.git' --exclude='node_modules' --exclude='.env' ./ u976542190@88.223.85.92:/home/u976542190/domains/pets.jcomtec.com
