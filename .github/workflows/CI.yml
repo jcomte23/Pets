@@ -84,11 +84,18 @@ jobs:
 
       - name: Update .env file on server
         run: |
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PORT=.*|DB_PORT=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# APP_NAME=.*|APP_NAME=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# APP_ENV=.*|APP_ENV=${{ secrets.APP_ENV }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# APP_URL=.*|APP_URL=${{ secrets.APP_URL }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_CONNECTION=.*|DB_CONNECTION=${{ secrets.DB_CONNECTION }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=${{ secrets.DB_HOST }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PORT=.*|DB_PORT=${{ secrets.DB_PORT }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+
+      - name: Generate application key
+        run: php artisan key:generate
 
       - name: Deploy to Hostinger server
         run: |
