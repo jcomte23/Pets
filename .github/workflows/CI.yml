@@ -1,4 +1,4 @@
-name: Laravel CI
+name: CI & CD
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring, pdo, bcmath
           ini-values: post_max_size=256M, upload_max_filesize=256M
           coverage: none
@@ -67,7 +67,18 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 65002 88.223.85.92 >> ~/.ssh/known_hosts
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Build assets with Vite
+        run: npm run build
+
       - name: Deploy to Hostinger server
         run: |
           rsync -avz -e "ssh -p 65002" --exclude='.git' --exclude='node_modules' --exclude='.env' ./ u976542190@88.223.85.92:/home/u976542190/domains/pets.jcomtec.com
-          ssh -p 65002 u976542190@88.223.85.92 'cd /home/u976542190/domains/pets.jcomtec.com && composer2 install --no-dev && npm install && npm run build && php artisan migrate --force'
+          ssh -p 65002 u976542190@88.223.85.92 'cd /home/u976542190/domains/pets.jcomtec.com && composer2 install --no-dev && php artisan migrate --force'
