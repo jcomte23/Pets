@@ -78,6 +78,10 @@ jobs:
       - name: Build assets with Vite
         run: npm run build
 
+      - name: Create .env file
+        run: |
+          cp .env.example .env
+
       - name: Update .env file on server
         run: |
           ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
