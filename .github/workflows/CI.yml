@@ -90,9 +90,9 @@ jobs:
           ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_CONNECTION=.*|DB_CONNECTION=${{ secrets.DB_CONNECTION }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
           ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=${{ secrets.DB_HOST }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
           ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PORT=.*|DB_PORT=${{ secrets.DB_PORT }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=${{ secrets.APP_NAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=${{ secrets.DB_DATABASE }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=${{ secrets.DB_USERNAME }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=${{ secrets.DB_PASSWORD }}|" /home/u976542190/domains/pets.jcomtec.com/.env'
 
       - name: Deploy to Hostinger server
         run: |
