@@ -78,17 +78,17 @@ jobs:
       - name: Build assets with Vite
         run: npm run build
 
-      - name: Create .env file
+      - name: Create .env file on server
         run: |
-          cp .env.example .env
+          ssh -p 65002 u976542190@88.223.85.92 'cp /home/u976542190/domains/pets.jcomtec.com/.env.example /home/u976542190/domains/pets.jcomtec.com/.env'
 
       - name: Update .env file on server
         run: |
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PORT=.*|DB_PORT=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
-          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=TEST|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_HOST=.*|DB_HOST=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PORT=.*|DB_PORT=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_DATABASE=.*|DB_DATABASE=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_USERNAME=.*|DB_USERNAME=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
+          ssh -p 65002 u976542190@88.223.85.92 'sed -i "s|^# DB_PASSWORD=.*|DB_PASSWORD=Test|" /home/u976542190/domains/pets.jcomtec.com/.env'
 
       - name: Deploy to Hostinger server
         run: |
